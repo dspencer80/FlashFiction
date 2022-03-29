@@ -8,10 +8,18 @@ namespace Contacts
 {
     internal class PhoneBook
     {
-        private List<Contacts> _contact { get; set; }
+        private List<Contacts> _contact { get; set; } = new List<Contacts>();
         private void DisplayContactDetails(Contacts contacts)
         {
             Console.WriteLine($"Contacts: {contacts.Name}, {contacts.Number}");
+        }
+
+        private void DisplayContactsDetails(List<Contacts> contacts)
+        {
+            foreach (Contacts contact in contacts)
+            {
+                DisplayContactDetails(contact);
+            }
         }
 
         public void AddContacts(Contacts contacts)
@@ -37,13 +45,15 @@ namespace Contacts
 
         public void DisplayAllContacts()
         {
-           foreach (var contact in _contact)
-            {
-
-                DisplayContactDetails(contact);
-            }
+            DisplayContactsDetails(_contact);
         }
 
+        public void DisplayMatchingContacts(string searchPhrase)
+        {
+            var matchingContact = _contact.Where(c => c.Name.Contains(searchPhrase)).ToList();
+            DisplayContactsDetails(matchingContact);
 
+
+        }
     }
 }
