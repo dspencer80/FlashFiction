@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contacts 
+namespace FlashFiction
+
 {
     internal class Program
     {
@@ -14,10 +15,10 @@ namespace Contacts
             Console.WriteLine("CONTACTS");
             Console.WriteLine("*****************************");
             Console.WriteLine("Select Operation:");
-            Console.WriteLine("1 Add new contact");
-            Console.WriteLine("2 Display contact by phone number");
-            Console.WriteLine("3 View all contacts");
-            Console.WriteLine("4 Search Contacts");
+            Console.WriteLine("1. Add new contact");
+            Console.WriteLine("2. Display contact by phone number");
+            Console.WriteLine("3. View all contacts");
+            Console.WriteLine("4. Search Contacts");
             Console.WriteLine("Press 'x' to exit");
 
 
