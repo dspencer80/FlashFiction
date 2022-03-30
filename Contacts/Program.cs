@@ -4,53 +4,76 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contacts
+namespace Contacts 
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to my contact list.");
-            Console.WriteLine("Select Operation");
-            Console.WriteLine("1 Add contact");
-            Console.WriteLine("2 Display contact by Number");
+            Console.WriteLine("*****************************");
+            Console.WriteLine("CONTACTS");
+            Console.WriteLine("*****************************");
+            Console.WriteLine("Select Operation:");
+            Console.WriteLine("1 Add new contact");
+            Console.WriteLine("2 Display contact by phone number");
             Console.WriteLine("3 View all contacts");
             Console.WriteLine("4 Search Contacts");
+            Console.WriteLine("Press 'x' to exit");
 
 
             var userInput = Console.ReadLine();
 
             var PhoneBook = new PhoneBook();
 
-            switch (userInput)
+            while (true)
             {
-                case "1":
-                    Console.WriteLine("Contact Name:");
-                    var name = Console.ReadLine();
-                    Console.WriteLine("Contact Number");
-                    var number = Console.ReadLine();
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine("Contact Name:");
+                        var name = Console.ReadLine();
+                        Console.WriteLine("Contact Number");
+                        var number = Console.ReadLine();
 
-                    var newContact = new Contacts(name, number);
-                    PhoneBook.AddContacts(newContact);
+                        var newContact = new Contacts(name, number);
+                        PhoneBook.AddContacts(newContact);
 
-                    break;
+                        break;
 
-                case "2":
-                    
-                    break;
+                    case "2":
 
-                case "3":
-                   
-                    break;
+                        Console.WriteLine("Contact number to search:");
+                        var searchNumber = Console.ReadLine();
+                        PhoneBook.DisplayContact(searchNumber);
+                        break;
 
-                case "4":
-                  
-                    break;
+                    case "3":
+                        PhoneBook.DisplayAllContacts();
+                        break;
 
-                default: Console.WriteLine("Please select a valid operation");
-                    break;
+                    case "4":
+                        Console.WriteLine("Name search phrase");
+                        var searchPhrase =Console.ReadLine();
+
+                        PhoneBook.DisplayMatchingContacts(searchPhrase);
+                        break;
+
+                    case "x":
+                        return;
+
+                    default:
+                        Console.WriteLine("Please select a valid operation");
+                        break;
+
+                }
+
+                Console.WriteLine("Select operation");
+                userInput = Console.ReadLine();
 
             }
+
+            
+
         }
     }
 }
