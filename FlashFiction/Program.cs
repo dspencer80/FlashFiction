@@ -5,76 +5,109 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FlashFiction
-
 {
-    internal class Program
+    public class bookShelf
     {
-        static void Main(string[] args)
+        Shelf book;
+
+        public bookShelf()
         {
-            Console.WriteLine("*****************************");
-            Console.WriteLine("CONTACTS");
-            Console.WriteLine("*****************************");
-            Console.WriteLine("Select Operation:");
-            Console.WriteLine("1. Add new contact");
-            Console.WriteLine("2. Display contact by phone number");
-            Console.WriteLine("3. View all contacts");
-            Console.WriteLine("4. Search Contacts");
-            Console.WriteLine("Press 'x' to exit");
+            book = new Shelf();
+        }
 
+        public static void Main(string[] args)
+        {
+            string selection = "";
+            bookShelf prompt = new bookShelf();
 
-            var userInput = Console.ReadLine();
-
-            var PhoneBook = new PhoneBook();
-
-            while (true)
+            prompt.displayMenu();
+            while (!selection.ToUpper().Equals("Q"))
             {
-                switch (userInput)
-                {
-                    case "1":
-                        Console.WriteLine("Contact Name:");
-                        var name = Console.ReadLine();
-                        Console.WriteLine("Contact Number");
-                        var number = Console.ReadLine();
-
-                        var newContact = new Contacts(name, number);
-                        PhoneBook.AddContacts(newContact);
-
-                        break;
-
-                    case "2":
-
-                        Console.WriteLine("Contact number to search:");
-                        var searchNumber = Console.ReadLine();
-                        PhoneBook.DisplayContact(searchNumber);
-                        break;
-
-                    case "3":
-                        PhoneBook.DisplayAllContacts();
-                        break;
-
-                    case "4":
-                        Console.WriteLine("Name search phrase");
-                        var searchPhrase =Console.ReadLine();
-
-                        PhoneBook.DisplayMatchingContacts(searchPhrase);
-                        break;
-
-                    case "x":
-                        return;
-
-                    default:
-                        Console.WriteLine("Please select a valid operation");
-                        break;
-
-                }
-
-                Console.WriteLine("Select operation");
-                userInput = Console.ReadLine();
-
+                Console.WriteLine("Selection: ");
+                selection = Console.ReadLine();
+                prompt.performAction(selection);
             }
+        }
 
-            
+        void displayMenu()
+        {
+            Console.WriteLine("FLASH FICTION");
+            Console.WriteLine("=========");
+            Console.WriteLine("A - Add a story");
+            Console.WriteLine("D - Delete a story");
+            Console.WriteLine("E - Edit a story");
+            Console.WriteLine("L - Show all stories");
+            Console.WriteLine("Q - Quit");
+        }
 
+        void performAction(string selection)
+        {
+            string name = "";
+            string title = "";
+            string story = "";
+
+            switch (selection.ToUpper())
+            {
+                case "A":
+                    Console.WriteLine("Enter Author's Name: ");
+                    name = Console.ReadLine();
+                    Console.WriteLine("Enter Your Title: ");
+                    title = Console.ReadLine();
+                    Console.WriteLine("Begin Your Story: ");
+                    story = Console.ReadLine();
+                    if (book.add(name, title, story))
+                    {
+                        Console.WriteLine("Story successfully added!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("A story is already on file for {0}.", name);
+                    }
+                    break;
+                case "D":
+                    Console.WriteLine("Enter Story to Delete: ");
+                    name = Console.ReadLine();
+                    if (book.remove(name))
+                    {
+                        Console.WriteLine("Story successfully removed");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Story for {0} could not be found.", name);
+                    }
+                    break;
+                case "L":
+                    if (book.isEmpty())
+                    {
+                        Console.WriteLine("There are no stories.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Stories:");
+                        book.list(
+                          delegate (Story a) {
+                              Console.WriteLine("{0} - {1}", a.name, a.title, a.story);
+                          }
+                        );
+                    }
+                    break;
+                case "E":
+                    Console.WriteLine("Enter Story to Edit: ");
+                    title = Console.ReadLine();
+                    Story stories = book.find(title);
+                    if (stories == null)
+                    {
+                        Console.WriteLine("Story for {0} count not be found.", stories);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter new Story: ");
+                        stories.title = Console.ReadLine();
+                        Console.WriteLine("Story updated for {0}", stories);
+                    }
+                    break;
+            }
         }
     }
+
 }
