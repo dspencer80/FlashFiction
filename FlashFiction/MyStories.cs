@@ -8,12 +8,8 @@ namespace FlashFiction
 {
     class Shelf
     {
-        List<Story> stories;
+        List<Story> stories = new List<Story>();
 
-        public Shelf()
-        {
-            stories = new List<Story>();
-        }
 
         public bool add(string name, string title, string story)
         {

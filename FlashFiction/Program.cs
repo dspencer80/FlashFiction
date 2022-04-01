@@ -4,19 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace FlashFiction
 {
     public class bookShelf
     {
-        Shelf book;
+        Shelf book = new Shelf();
 
-        public bookShelf()
-        {
-            book = new Shelf();
-        }
+
 
         public static void Main(string[] args)
         {
+            List<Fiction> myFiction = new List<Fiction>();
+
+            myFiction.Add(new Fiction
+            {
+                Name = "Todd Boyd",
+                Title = "Speed Up",
+                Story = "There it is.Straight ahead.Speed it up.Deadman’s curve."
+            });
+
+
+            myFiction.Add(new Fiction
+            {
+                Name = "Frederick K. Foote",
+                Title = "Vow",
+                Story = "As I say 'I do ' I wink at the bridesmaid."
+            });
+
+
+            myFiction.Add(new Fiction
+            {
+                Name = "Angel Ackerman",
+                Title = "Stoicism",
+                Story = "She presented the pregnancy test ignorant of his successful vasectomy"
+            });
+
+            foreach (var fiction in myFiction)
+            {
+                Console.WriteLine(fiction.Name);
+                Console.WriteLine(fiction.Title);
+                Console.WriteLine(fiction.Story);
+                Console.WriteLine("Click 'enter' to read another story!");
+                Console.WriteLine("*************************");
+                Console.ReadLine();
+
+            }
+
             string selection = "";
             bookShelf prompt = new bookShelf();
 
@@ -85,7 +120,8 @@ namespace FlashFiction
                     {
                         Console.WriteLine("Stories:");
                         book.list(
-                          delegate (Story a) {
+                          delegate (Story a)
+                          {
                               Console.WriteLine("{0} - {1}", a.name, a.title, a.story);
                           }
                         );
