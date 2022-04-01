@@ -1,0 +1,3 @@
+# FlashFiction
+
+Always the procrastinator, I didn't do many commits early on. I wanted to have it the way I wanted it. I made a lot of changes throughout the making of this app, including name changes as well as project changes, therefore I didn't commit until late. Nonetheless, my app is a console app that displays three stories of flash fiction from a populated list, as well as gives you the opportunity to write your own. So I created and populated a list as a requirement. Also, I created multiple classes, some of which inherited from the parent class. I used a master loop to allow the user to choose different options.I have thoroughly enjoyed this class, with limited time available, I feel like I fell behind a few times but always pushed through. 
